@@ -54,8 +54,8 @@ function Player:move(dt)
 	end
 end
 
-function Player:mousepressed(btn, x, y)
-	if btn == 1 and self.canShoot then
+function Player:keypressed(btn)
+	if btn == 'z' and self.canShoot then
 		self.canShoot = false
 		print('Player shot')
 

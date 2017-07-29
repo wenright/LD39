@@ -24,11 +24,10 @@ function Game:enter()
 		love.graphics.push()
 
 		love.graphics.translate(-100, -100)
-
 		love.graphics.rotate(-45)
 
 		love.graphics.setColor(255, 255, 255)
-		love.graphics.rectangle('fill', 0, 0, 1000, 1000)
+		love.graphics.rectangle('fill', 0, 0, 50, 1000)
 
 		love.graphics.pop()
 	end
@@ -70,6 +69,10 @@ end
 
 function Game:mousepressed(x, y, button)
 	Game.player:mousepressed(button, x, y)
+end
+
+function Game:keypressed(key)
+	Game.player:keypressed(key)
 end
 
 function Game:restart()

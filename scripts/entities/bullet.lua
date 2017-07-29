@@ -25,8 +25,17 @@ function Bullet:update(dt)
 	self.timer:update(dt)
 end
 
+function Bullet:drawWhite()
+	love.graphics.setColor(255, 255, 255)
+	self:draw()
+end
+
+function Bullet:drawBlack()
+	love.graphics.setColor(0, 0, 0)
+	self:draw()
+end
+
 function Bullet:draw()
-	love.graphics.setColor(255, 0, 0)
 	love.graphics.rectangle('fill', self.position.x, self.position.y, 2, 2)
 end
 
