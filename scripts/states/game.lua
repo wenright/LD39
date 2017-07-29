@@ -12,7 +12,7 @@ function Game:enter()
 		Instantiate(Enemy {x = 64, y = 24})
 	}
 
-	love.graphics.setBackgroundColor(160, 160, 160)
+	love.graphics.setBackgroundColor(255, 255, 255)
 
 	Camera:lookAt(24, 16)
 
@@ -23,7 +23,10 @@ function Game:enter()
 	self.stencilFunction = function()
 		love.graphics.push()
 
-		love.graphics.rotate(45)
+		love.graphics.translate(-100, -100)
+
+		love.graphics.rotate(-45)
+
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.rectangle('fill', 0, 0, 1000, 1000)
 
@@ -49,9 +52,18 @@ function Game:draw()
 
 	love.graphics.setStencilTest('equal', 0)
 
+	Camera:detach()
+
+	love.graphics.setColor(0, 0, 0)
+	-- TODO use screen res.
+	love.graphics.rectangle('fill', 0, 0, 1000, 1000)
+
+	Camera:attach()
+
 	Game.entities:loop('drawWhite')
 
 	Camera:detach()
+
 
 	love.graphics.setColor(255, 0, 0)
 end
