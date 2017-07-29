@@ -1,0 +1,61 @@
+Lume = require 'lib.lume.lume'
+
+Timer = require 'lib.hump.timer'
+Gamestate = require 'lib.hump.gamestate'
+Class = require 'lib.hump.class'
+Camera = require 'lib.hump.camera'(0, 0)
+
+Bump = require 'lib.bump.bump'
+
+Lovebird = require 'lib.lovebird.lovebird'
+
+EntitySystem = require 'lib.entitysystem'
+
+Animation = require 'lib.anim8'
+
+Transform = require 'scripts.transform'
+Rigidbody = require 'scripts.entities.rigidbody'
+Actor = require 'scripts.entities.actor'
+Player = require 'scripts.entities.player'
+Enemy = require 'scripts.entities.enemy'
+Bullet = require 'scripts.entities.bullet'
+Tile = require 'scripts.entities.tile'
+Map = require 'scripts.map'
+World = require 'scripts.world'
+
+Game = require 'scripts.states.game'
+Menu = require 'scripts.states.menu'
+
+Debug = true
+
+function love.load(args)
+	-- Allows printing in sublime text
+	io.stdout:setvbuf('no')
+
+	Camera:zoom(5)
+
+	love.graphics.setDefaultFilter('nearest', 'nearest')
+
+	-- Setup main menu (Just start in game state for playtesting purposes)
+	Gamestate.registerEvents()
+	Gamestate.switch(Game)
+
+	love.graphics.setFont(love.graphics.newFont('font/kenpixel_high.ttf', 64))
+end
+
+function love.update(dt)
+	Timer.update(dt)
+
+	if Debug then
+		Lovebird:update(dt)
+	end
+end
+
+function love.draw()
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.print(love.timer.getFPS())
+end
+
+function love.keypressed(key)
+	if key == 'escape' then love.event.quit() end
+end
