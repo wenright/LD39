@@ -11,6 +11,8 @@ function Player:init(properties)
 	self.filterFunction = function(item, other)
 		if other.type == 'Bullet' then
 			return nil
+		elseif other.type == 'Sunbeam' then
+			return nil
 		else
 			return 'slide'
 		end

@@ -20,16 +20,24 @@ function Game:enter()
 
 	self.timer = Timer.new()
 
+	self.sunbeams = EntitySystem()
+
+	self.sunbeams:add(Sunbeam {x = -0,   y = -100, w = 50, h = 1000})
+	self.sunbeams:add(Sunbeam {x = -100, y = -100, w = 50, h = 1000})
+	self.sunbeams:add(Sunbeam {x = -350, y = -100, w = 50, h = 1000})
+
 	self.stencilFunction = function()
-		love.graphics.push()
+		self.sunbeams:forEach(function(sunbeam)
+			love.graphics.push()
 
-		love.graphics.translate(-100, -100)
-		love.graphics.rotate(-45)
+			love.graphics.translate(sunbeam.position.x, sunbeam.position.y)
+			love.graphics.rotate(sunbeam.rotation)
 
-		love.graphics.setColor(255, 255, 255)
-		love.graphics.rectangle('fill', 0, 0, 50, 1000)
+			love.graphics.setColor(255, 255, 255)
+			love.graphics.rectangle('fill', 0, 0, sunbeam.w, sunbeam.h)
 
-		love.graphics.pop()
+			love.graphics.pop()
+		end)
 	end
 end
 
@@ -65,10 +73,6 @@ function Game:draw()
 
 
 	love.graphics.setColor(255, 0, 0)
-end
-
-function Game:mousepressed(x, y, button)
-	Game.player:mousepressed(button, x, y)
 end
 
 function Game:keypressed(key)
