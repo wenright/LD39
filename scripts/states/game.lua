@@ -12,13 +12,23 @@ function Game:enter()
 		Instantiate(Enemy {x = 64, y = 24})
 	}
 
-	love.graphics.setBackgroundColor(0, 0, 0)
+	love.graphics.setBackgroundColor(160, 160, 160)
 
 	Camera:lookAt(24, 16)
 
 	self.timescale = 1
 
 	self.timer = Timer.new()
+
+	self.stencilFunction = function()
+		love.graphics.push()
+
+		love.graphics.rotate(45)
+		love.graphics.setColor(255, 255, 255)
+		love.graphics.rectangle('fill', 0, 0, 1000, 1000)
+
+		love.graphics.pop()
+	end
 end
 
 function Game:update(dt)
@@ -32,9 +42,12 @@ end
 function Game:draw()
 	Camera:attach()
 
+	love.graphics.stencil(Game.stencilFunction, 'replace', 1)
+	love.graphics.setStencilTest('greater', 0)
+
 	Game.entities:loop('drawBlack')
 
-	-- Draw stencil here
+	love.graphics.setStencilTest('equal', 0)
 
 	Game.entities:loop('drawWhite')
 
