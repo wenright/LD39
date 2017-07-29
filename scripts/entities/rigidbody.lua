@@ -4,8 +4,10 @@ local Rigidbody = Class {__includes = Transform}
 function Rigidbody:init(properties)
   Transform.init(self, properties)
 
-  self.w = properties.w or Map.tileSize
-  self.h = properties.h or Map.tileSize
+  self.w = properties.colliderW or properties.w or Map.tileSize
+  self.h = properties.colliderH or properties.h or Map.tileSize
+
+	self.colliderOffsetX, self.colliderOffsetY = properties.colliderOffsetX or 0, properties.colliderOffsetY or 0
 
   self.gravity = properties.gravity or World.gravity
   self.drag = properties.drag or World.drag

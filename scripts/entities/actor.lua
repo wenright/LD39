@@ -2,6 +2,9 @@
 local Actor = Class {__includes = Rigidbody}
 
 function Actor:init(properties)
+	properties.colliderW, properties.colliderH = 6, 16
+	properties.colliderOffsetX, properties.colliderOffsetY = 5, 0
+
 	Rigidbody.init(self, properties)
 
 	self.speed = properties.speed or 100
@@ -31,7 +34,7 @@ function Actor:drawWhite()
 end
 
 function Actor:draw()
-	self.animation:draw(self.image, self.position.x + self.w / 2, self.position.y, 0, self.flipped, 1, self.w / 2)
+	self.animation:draw(self.image, self.position.x + self.w / 2 - self.colliderOffsetX, self.position.y, 0, self.flipped, 1, self.w / 2)
 end
 
 function Actor:jump()

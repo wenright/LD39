@@ -2,7 +2,8 @@ local Tile = Class {
 	__includes = Transform,
 	type = 'tile',
 	tiles = {
-		g = love.graphics.newImage('art/tile1.png')
+		f = love.graphics.newImage('art/floor-1.png'),
+		l = love.graphics.newImage('art/wall-left-1.png')
 	}
 }
 
