@@ -1,4 +1,4 @@
-local Map = Class {tileSize = 8}
+local Map = Class {tileSize = 16}
 
 function Map:init(filename)
 	self.tiles = EntitySystem()
@@ -34,6 +34,14 @@ function Map:init(filename)
 
 		y = y + self.tileSize
 	end
+end
+
+function Map:drawBlack()
+	self.tiles:loop('drawBlack')
+end
+
+function Map:drawWhite()
+	self.tiles:loop('drawWhite')
 end
 
 function Map:draw()

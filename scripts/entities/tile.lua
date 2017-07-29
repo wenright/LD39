@@ -2,9 +2,7 @@ local Tile = Class {
 	__includes = Transform,
 	type = 'tile',
 	tiles = {
-		g = love.graphics.newImage('art/grass.png'),
-		m = love.graphics.newImage('art/metal.png'),
-		d = love.graphics.newImage('art/dirt.png'),
+		g = love.graphics.newImage('art/tile1.png')
 	}
 }
 
@@ -18,6 +16,16 @@ function Tile:init(properties)
 	Game.world:add(self)
 
 	self.img = self.tiles[self.id]
+end
+
+function Tile:drawBlack()
+	love.graphics.setColor(0, 0, 0)
+	self:draw()
+end
+
+function Tile:drawWhite()
+	love.graphics.setColor(255, 255, 255)
+	self:draw()
 end
 
 function Tile:draw()

@@ -5,12 +5,13 @@ function Actor:init(properties)
 	Rigidbody.init(self, properties)
 
 	self.speed = properties.speed or 100
-	self.jumpForce = properties.jumpForce or 150
+	self.jumpForce = properties.jumpForce or 200
 	self.canJump = true
 
-	self.image = love.graphics.newImage('art/player_walking.png')
+	self.w, self.h = 16, 16
+	self.image = love.graphics.newImage('art/player-sheet.png')
 	local g = Animation.newGrid(self.w, self.h, self.image:getWidth(), self.image:getHeight())
-	self.animation = Animation.newAnimation(g('1-4', 1), 0.075)
+	self.animation = Animation.newAnimation(g('1-8', 1), 0.075)
 
 	self.flipped = 1
 end
@@ -19,11 +20,17 @@ function Actor:update(dt)
 	Rigidbody.update(self, dt)
 end
 
-function Actor:draw()
-	-- love.graphics.setColor(55, 55, 123)
-	-- love.graphics.rectangle('fill', self:getX(), self:getY(), self.w, self.h)
+function Actor:drawBlack()
+	love.graphics.setColor(0, 0, 0)
+	self:draw()
+end
 
+function Actor:drawWhite()
 	love.graphics.setColor(255, 255, 255)
+	self:draw()
+end
+
+function Actor:draw()
 	self.animation:draw(self.image, self.position.x + self.w / 2, self.position.y, 0, self.flipped, 1, self.w / 2)
 end
 

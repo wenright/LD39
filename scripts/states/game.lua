@@ -12,7 +12,7 @@ function Game:enter()
 		Instantiate(Enemy {x = 64, y = 24})
 	}
 
-	love.graphics.setBackgroundColor(57, 57, 58)
+	love.graphics.setBackgroundColor(0, 0, 0)
 
 	Camera:lookAt(24, 16)
 
@@ -32,7 +32,11 @@ end
 function Game:draw()
 	Camera:attach()
 
-	Game.entities:loop('draw')
+	Game.entities:loop('drawBlack')
+
+	-- Draw stencil here
+
+	Game.entities:loop('drawWhite')
 
 	Camera:detach()
 

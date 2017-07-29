@@ -1,3 +1,5 @@
+love.graphics.setDefaultFilter('nearest', 'nearest')
+
 Lume = require 'lib.lume.lume'
 
 Timer = require 'lib.hump.timer'
@@ -33,8 +35,6 @@ function love.load(args)
 	io.stdout:setvbuf('no')
 
 	Camera:zoom(5)
-
-	love.graphics.setDefaultFilter('nearest', 'nearest')
 
 	-- Setup main menu (Just start in game state for playtesting purposes)
 	Gamestate.registerEvents()
