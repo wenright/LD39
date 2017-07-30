@@ -1,11 +1,17 @@
 local Bullet = Class {__includes = Actor}
 
 function Bullet:init(properties)
+	properties.w, properties.h = 4, 4
+
 	Actor.init(self, properties)
 
 	self.gravity = 0
-	self.filterFunction = function()
-		return nil
+	self.filterFunction = function(item, other)
+		if other.type == 'Tile' then
+			return 'touch'
+		else
+			return nil
+		end
 	end
 
 	self.velocity.x = 150 * (properties.dir or 1)
@@ -39,5 +45,15 @@ end
 function Bullet:draw()
 	love.graphics.rectangle('fill', self.position.x, self.position.y, 2, 2)
 end
+
+function Bullet:collide(col)
+	if col.other.type == 'Tile' then
+		Timer.after(0, function() Destroy(self) end)
+
+		-- TODO destructable tiles?
+		-- Timer.after(0, function() Destroy(col.other) end)
+	end
+end
+
 
 return Bullet

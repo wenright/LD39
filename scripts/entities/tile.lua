@@ -1,6 +1,5 @@
 local Tile = Class {
 	__includes = Transform,
-	type = 'tile',
 	tiles = {
 		a = love.graphics.newImage('art/floor-1.png'),
 		b = love.graphics.newImage('art/floor-2.png'),
@@ -20,6 +19,8 @@ function Tile:init(properties)
 	Game.world:add(self)
 
 	self.img = self.tiles[self.id]
+
+	self.type = 'Tile'
 end
 
 function Tile:drawBlack()

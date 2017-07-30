@@ -1,5 +1,5 @@
 local Sunbeam = Class {
-	__includes = Rigidbody
+	__includes = Transform
 }
 
 function Sunbeam:init(properties)

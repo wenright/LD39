@@ -57,6 +57,12 @@ function Game:draw()
 
 	Game.entities:loop('drawWhite')
 
+	-- Debug physics
+	-- love.graphics.setColor(255, 0, 0)
+	-- for k, v in pairs(self.world:getItems()) do
+	-- 	love.graphics.rectangle('line', v.position.x, v.position.y, v.w, v.h)
+	-- end
+
 	Camera:detach()
 end
 

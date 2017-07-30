@@ -24,6 +24,10 @@ function World:hasItem(obj)
 	return self.world:hasItem(obj)
 end
 
+function World:getItems()
+	return self.world:getItems()
+end
+
 function World:move(obj, x, y, filter)
 	local newX, newY, collisions, len = self.world:move(obj, x, y, filter)
 

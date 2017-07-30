@@ -3,8 +3,6 @@ local Enemy = Class {__includes = Actor}
 function Enemy:init(properties)
 	Actor.init(self, properties)
 
-	print('new')
-
 	self.filterFunction = function(item, other)
 		if other.type == 'Bullet' then
 			return 'cross'

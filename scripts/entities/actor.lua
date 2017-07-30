@@ -2,7 +2,7 @@
 local Actor = Class {__includes = Rigidbody}
 
 function Actor:init(properties)
-	properties.colliderW, properties.colliderH = 6, 16
+	properties.colliderW, properties.colliderH = properties.w or 6, properties.h or 16
 	properties.colliderOffsetX, properties.colliderOffsetY = 5, 0
 
 	Rigidbody.init(self, properties)
