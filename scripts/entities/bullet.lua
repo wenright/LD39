@@ -9,12 +9,13 @@ function Bullet:init(properties)
 	end
 
 	self.velocity.x = 150 * (properties.dir or 1)
-	self.drag = 1
+	self.drag = 0.5
+	self.lifetime = 1
 
 	self.type = 'Bullet'
 
 	self.timer = Timer.new()
-	self.timer:after(1, function()
+	self.timer:after(self.lifetime, function()
 		Destroy(self)
 	end)
 end

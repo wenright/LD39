@@ -68,7 +68,7 @@ function Player:keypressed(btn)
 	if btn == 'z' and self.canShoot and self.weaponCharges > 0 then
 		local bullet = {
 			x = self.position.x,
-			y = self.position.y,
+			y = self.position.y + 6,
 			time = self.timeRunning,
 			dir = self.flipped
 		}
@@ -119,7 +119,7 @@ end
 function Player:drawGUI()
 	-- Draw player's weapon charges
 	for i=1, Game.player.maxCharges do
-		local x = 60 * i - 30
+		local x = 45 * i - 30
 		local y = 30
 		local w = 30
 		local h = 15
