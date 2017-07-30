@@ -20,9 +20,7 @@ function Game:enter()
 
 	self.sunbeams = EntitySystem()
 
-	-- self.sunbeams:add(Sunbeam {x = 0,   y = -100, w = 50, h = 1000})
 	self.sunbeams:add(Sunbeam {x = 100, y = -100, w = 50, h = 1000})
-	-- self.sunbeams:add(Sunbeam {x = 350, y = -100, w = 50, h = 1000})
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)
@@ -33,8 +31,6 @@ function Game:enter()
 end
 
 function Game:update(dt)
-	dt = dt
-
 	self.timer:update(dt)
 
 	self.entities:loop('update', dt)
