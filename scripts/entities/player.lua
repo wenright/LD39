@@ -22,6 +22,7 @@ function Player:init(properties)
 
 	self.maxCharges = 3
 	self.weaponCharges = self.maxCharges
+	self.chargeSpeed = 1
 
 	self.type = 'Player'
 end
@@ -63,11 +64,11 @@ end
 -- Charge the player's weapon at each tick
 function Player:charge(dt)
 	-- TODO does weapon charge more the longer stood in light, or even a split second would be full charge?
-	self.weaponCharges = self.maxCharges
+	self.weaponCharges = math.min(self.weaponCharges + dt * self.chargeSpeed, self.maxCharges)
 end
 
 function Player:keypressed(btn)
-	if btn == 'z' and self.canShoot and self.weaponCharges > 0 then
+	if btn == 'z' and self.canShoot and self.weaponCharges >= 1 then
 		local bullet = {
 			x = self.position.x + self.flipped * 7,
 			y = self.position.y + 8,
