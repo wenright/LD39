@@ -1,6 +1,8 @@
 local Enemy = Class {__includes = Actor}
 
 function Enemy:init(properties)
+	properties.spritesheet = 'art/hazmat-sheet.png'
+
 	Actor.init(self, properties)
 
 	self.filterFunction = function(item, other)

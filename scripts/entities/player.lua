@@ -1,6 +1,8 @@
 local Player = Class {__includes = Actor}
 
 function Player:init(properties)
+	properties.spritesheet = 'art/player-weapon-sheet.png'
+
 	Actor.init(self, properties)
 
 	self.canShoot = true
@@ -67,8 +69,8 @@ end
 function Player:keypressed(btn)
 	if btn == 'z' and self.canShoot and self.weaponCharges > 0 then
 		local bullet = {
-			x = self.position.x,
-			y = self.position.y + 6,
+			x = self.position.x + self.flipped * 7,
+			y = self.position.y + 8,
 			time = self.timeRunning,
 			dir = self.flipped
 		}

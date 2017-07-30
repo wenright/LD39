@@ -7,7 +7,7 @@ function Game:enter()
 	self.map = Instantiate(Map 'maps/map1.csv')
 	self.player = Instantiate(Player {x = 24, y = 64})
 	self.enemies = {
-		Instantiate(Enemy {x = 128, y = 64}),
+		Instantiate(Enemy {x = 256, y = 64}),
 		Instantiate(Enemy {x = 96, y = 64}),
 		Instantiate(Enemy {x = 64, y = 36})
 	}

@@ -12,7 +12,7 @@ function Actor:init(properties)
 	self.canJump = true
 
 	self.w, self.h = 16, 16
-	self.image = love.graphics.newImage('art/player-sheet.png')
+	self.image = love.graphics.newImage(properties.spritesheet or 'art/player-sheet.png')
 	local g = Animation.newGrid(self.w, self.h, self.image:getWidth(), self.image:getHeight())
 	self.animation = Animation.newAnimation(g('1-8', 1), 0.075)
 
