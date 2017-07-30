@@ -14,9 +14,11 @@ function Game:enter()
 
 	love.graphics.setBackgroundColor(255, 255, 255)
 
-	Camera:lookAt(24, 16)
-
 	self.timer = Timer.new()
+
+	Camera:lookAt(24, 16)
+	self.cameraSpeed = 20
+	self.cameraAcceleration = 1.5
 
 	self.sunbeams = EntitySystem()
 
@@ -32,6 +34,10 @@ end
 
 function Game:update(dt)
 	self.timer:update(dt)
+
+	self.cameraSpeed = self.cameraSpeed + dt * self.cameraAcceleration
+
+	Camera:move(dt * self.cameraSpeed, 0)
 
 	self.entities:loop('update', dt)
 	self.sunbeams:loop('update', dt)

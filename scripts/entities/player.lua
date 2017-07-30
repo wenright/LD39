@@ -35,8 +35,6 @@ function Player:update(dt)
 	Actor.update(self, dt)
 
 	self:move(dt)
-
-	Camera:lockPosition(self.position.x, self.position.y, Camera.smooth.damped(5))
 end
 
 function Player:move(dt)
