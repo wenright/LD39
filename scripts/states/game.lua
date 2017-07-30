@@ -22,21 +22,14 @@ function Game:enter()
 
 	self.sunbeams = EntitySystem()
 
-	self.sunbeams:add(Sunbeam {x = -0,   y = -100, w = 50, h = 1000})
-	self.sunbeams:add(Sunbeam {x = -100, y = -100, w = 50, h = 1000})
-	self.sunbeams:add(Sunbeam {x = -350, y = -100, w = 50, h = 1000})
+	-- self.sunbeams:add(Sunbeam {x = 0,   y = -100, w = 50, h = 1000})
+	self.sunbeams:add(Sunbeam {x = 100, y = -100, w = 50, h = 1000})
+	-- self.sunbeams:add(Sunbeam {x = 350, y = -100, w = 50, h = 1000})
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)
-			love.graphics.push()
-
-			love.graphics.translate(sunbeam.position.x, sunbeam.position.y)
-			love.graphics.rotate(sunbeam.rotation)
-
 			love.graphics.setColor(255, 255, 255)
-			love.graphics.rectangle('fill', 0, 0, sunbeam.w, sunbeam.h)
-
-			love.graphics.pop()
+			love.graphics.polygon('fill', sunbeam.shape:getPoints())
 		end)
 	end
 end
@@ -47,6 +40,7 @@ function Game:update(dt)
 	self.timer:update(dt)
 
 	self.entities:loop('update', dt)
+	self.sunbeams:loop('update', dt)
 end
 
 function Game:draw()
@@ -70,9 +64,6 @@ function Game:draw()
 	Game.entities:loop('drawWhite')
 
 	Camera:detach()
-
-
-	love.graphics.setColor(255, 0, 0)
 end
 
 function Game:keypressed(key)

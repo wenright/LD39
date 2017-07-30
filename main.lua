@@ -1,5 +1,7 @@
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
+require 'scripts.collision'
+
 Lume = require 'lib.lume.lume'
 
 Timer = require 'lib.hump.timer'

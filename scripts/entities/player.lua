@@ -4,9 +4,9 @@ function Player:init(properties)
 	Actor.init(self, properties)
 
 	self.canShoot = true
+	self.ROF = 0.2
 
 	self.timer = Timer.new()
-	self.timeRunning = 0
 
 	self.filterFunction = function(item, other)
 		if other.type == 'Bullet' then
@@ -18,12 +18,14 @@ function Player:init(properties)
 		end
 	end
 
+	self.maxCharges = 3
+	self.weaponCharges = self.maxCharges
+
 	self.type = 'Player'
 end
 
 function Player:update(dt)
 	self.timer:update(dt)
-	self.timeRunning = self.timeRunning + dt
 
 	self.canJump = false
 
@@ -56,11 +58,14 @@ function Player:move(dt)
 	end
 end
 
-function Player:keypressed(btn)
-	if btn == 'z' and self.canShoot then
-		self.canShoot = false
-		print('Player shot')
+-- Charge the player's weapon at each tick
+function Player:charge(dt)
+	-- TODO does weapon charge more the longer stood in light, or even a split second would be full charge?
+	self.weaponCharges = self.maxCharges
+end
 
+function Player:keypressed(btn)
+	if btn == 'z' and self.canShoot and self.weaponCharges > 0 then
 		local bullet = {
 			x = self.position.x,
 			y = self.position.y,
@@ -69,11 +74,63 @@ function Player:keypressed(btn)
 		}
 
 		Instantiate(Bullet(bullet))
+
+		self.weaponCharges = self.weaponCharges - 1
+
+		self.canShoot = false
+		self.timer:after(self.ROF, function()
+			self.canShoot = true
+		end)
 	end
 end
 
-function Player:draw()
-	Actor.draw(self)
+function Player:drawBlack()
+	love.graphics.setColor(0, 0, 0)
+	self:draw()
+
+	Camera:detach()
+	self:drawBlackGUI()
+	Camera:attach()
+end
+
+function Player:drawWhite()
+	love.graphics.setColor(255, 255, 255)
+	self:draw()
+
+	Camera:detach()
+	self:drawWhiteGUI()
+	Camera:attach()
+end
+
+function Player:drawGUI()
+
+end
+
+function Player:drawWhiteGUI()
+	love.graphics.setColor(255, 255, 255)
+	self:drawGUI()
+end
+
+function Player:drawBlackGUI()
+	love.graphics.setColor(0, 0, 0)
+	self:drawGUI()
+end
+
+function Player:drawGUI()
+	-- Draw player's weapon charges
+	for i=1, Game.player.maxCharges do
+		local x = 60 * i - 30
+		local y = 30
+		local w = 30
+		local h = 15
+
+		if i <= Game.player.weaponCharges then
+			love.graphics.rectangle('fill', x, y, w, h)
+			love.graphics.rectangle('line', x, y, w, h)
+		else
+			love.graphics.rectangle('line', x, y, w, h)
+		end
+	end
 end
 
 return Player

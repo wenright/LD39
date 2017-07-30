@@ -5,6 +5,7 @@ local Tile = Class {
 		a = love.graphics.newImage('art/floor-1.png'),
 		b = love.graphics.newImage('art/floor-2.png'),
 		c = love.graphics.newImage('art/wall-left-1.png'),
+		e = love.graphics.newImage('art/wall-right-1.png'),
 		d = love.graphics.newImage('art/corner-bl-1.png')
 	}
 }
