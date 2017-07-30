@@ -5,18 +5,16 @@ function Game:enter()
 
 	self.entities = EntitySystem()
 	self.map = Instantiate(Map 'maps/map1.csv')
-	self.player = Instantiate(Player {x = 24, y = 16})
+	self.player = Instantiate(Player {x = 24, y = 64})
 	self.enemies = {
-		Instantiate(Enemy {x = 128, y = 0}),
-		Instantiate(Enemy {x = 96, y = 12}),
-		Instantiate(Enemy {x = 64, y = 24})
+		Instantiate(Enemy {x = 128, y = 64}),
+		Instantiate(Enemy {x = 96, y = 64}),
+		Instantiate(Enemy {x = 64, y = 36})
 	}
 
 	love.graphics.setBackgroundColor(255, 255, 255)
 
 	Camera:lookAt(24, 16)
-
-	self.timescale = 1
 
 	self.timer = Timer.new()
 
@@ -35,7 +33,7 @@ function Game:enter()
 end
 
 function Game:update(dt)
-	dt = dt * self.timescale
+	dt = dt
 
 	self.timer:update(dt)
 
@@ -73,8 +71,6 @@ end
 function Game:restart()
 	Game.timer:clear()
 	Game.timer = nil
-
-	Game.timescale = 1
 
 	Game:enter()
 end
