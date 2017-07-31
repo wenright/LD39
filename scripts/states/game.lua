@@ -31,6 +31,8 @@ function Game:enter()
 			love.graphics.polygon('fill', sunbeam.shape:getPoints())
 		end)
 	end
+
+	self.isOver = false
 end
 
 function Game:update(dt)

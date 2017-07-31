@@ -36,7 +36,9 @@ function Player:update(dt)
 
 	Actor.update(self, dt)
 
-	self:move(dt)
+	if not Game.isOver then
+		self:move(dt)
+	end
 
 	if not self.isCharging then
 		self.chargeSound:stop()
@@ -108,6 +110,10 @@ function Player:keypressed(btn)
 			self.canShoot = true
 		end)
 	end
+
+	if Game.isOver and btn == 'r' then
+		Game:enter()
+	end
 end
 
 function Player:drawBlack()
@@ -142,6 +148,7 @@ function Player:drawGUI()
 	-- Draw game over if that's the case
 	if Game.isOver then
 		love.graphics.printf('Game over!', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
+		love.graphics.printf('\'r\' to retry', 0, love.graphics.getHeight() / 2 + 60, love.graphics.getWidth(), 'center')
 	end
 
 	-- Draw player's weapon charges
