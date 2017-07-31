@@ -46,11 +46,14 @@ function Player:update(dt)
 end
 
 function Player:move(dt)
-	if love.keyboard.isDown('a', 'left') then
-		if Game:isOutOfView(self.position.x) then
-			-- TODO game over
-		end
+	if not Game.isOver and Game:isOutOfView(self.position.x) then
+		Game.isOver = true
 
+		Game.cameraAcceleration = 0
+		Game.cameraSpeed = 0
+	end
+
+	if love.keyboard.isDown('a', 'left') then
 		self:moveLeft(dt)
 	elseif love.keyboard.isDown('d', 'right') then
 		-- Prevent player from past camera view on the right
@@ -125,10 +128,6 @@ function Player:drawWhite()
 	Camera:attach()
 end
 
-function Player:drawGUI()
-
-end
-
 function Player:drawWhiteGUI()
 	love.graphics.setColor(Color.white)
 	self:drawGUI()
@@ -140,6 +139,11 @@ function Player:drawBlackGUI()
 end
 
 function Player:drawGUI()
+	-- Draw game over if that's the case
+	if Game.isOver then
+		love.graphics.printf('Game over!', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
+	end
+
 	-- Draw player's weapon charges
 	for i=1, Game.player.maxCharges do
 		local oldColor = {love.graphics.getColor()}
