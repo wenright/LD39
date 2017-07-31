@@ -33,6 +33,11 @@ Menu = require 'scripts.states.menu'
 
 Debug = true
 
+Color = {
+	white = {255, 255, 255},
+	black = {0, 0, 0}
+}
+
 function love.load(args)
 	-- Allows printing in sublime text
 	io.stdout:setvbuf('no')
@@ -55,7 +60,7 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(Color.white)
 	love.graphics.print(love.timer.getFPS())
 end
 

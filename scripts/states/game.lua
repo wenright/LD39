@@ -12,7 +12,7 @@ function Game:enter()
 		Instantiate(Enemy {x = 64, y = 36})
 	}
 
-	love.graphics.setBackgroundColor(255, 255, 255)
+	love.graphics.setBackgroundColor(Color.white)
 
 	self.timer = Timer.new()
 
@@ -26,7 +26,7 @@ function Game:enter()
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)
-			love.graphics.setColor(255, 255, 255)
+			love.graphics.setColor(Color.white)
 			love.graphics.polygon('fill', sunbeam.shape:getPoints())
 		end)
 	end
@@ -55,7 +55,7 @@ function Game:draw()
 
 	Camera:detach()
 
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(Color.black)
 	-- TODO use screen res.
 	love.graphics.rectangle('fill', 0, 0, 1000, 1000)
 

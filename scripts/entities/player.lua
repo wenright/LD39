@@ -86,7 +86,7 @@ function Player:keypressed(btn)
 end
 
 function Player:drawBlack()
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(Color.black)
 	self:draw()
 
 	Camera:detach()
@@ -95,7 +95,7 @@ function Player:drawBlack()
 end
 
 function Player:drawWhite()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(Color.white)
 	self:draw()
 
 	Camera:detach()
@@ -108,12 +108,12 @@ function Player:drawGUI()
 end
 
 function Player:drawWhiteGUI()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(Color.white)
 	self:drawGUI()
 end
 
 function Player:drawBlackGUI()
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(Color.black)
 	self:drawGUI()
 end
 

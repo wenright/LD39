@@ -33,12 +33,12 @@ function Bullet:update(dt)
 end
 
 function Bullet:drawWhite()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(Color.white)
 	self:draw()
 end
 
 function Bullet:drawBlack()
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(Color.black)
 	self:draw()
 end
 

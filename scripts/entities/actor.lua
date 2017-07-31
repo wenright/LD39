@@ -24,12 +24,12 @@ function Actor:update(dt)
 end
 
 function Actor:drawBlack()
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(Color.black)
 	self:draw()
 end
 
 function Actor:drawWhite()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(Color.white)
 	self:draw()
 end
 
