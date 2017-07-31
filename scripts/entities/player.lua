@@ -49,10 +49,7 @@ end
 
 function Player:move(dt)
 	if not Game.isOver and Game:isOutOfView(self.position.x + self.w) then
-		Game.isOver = true
-
-		Game.cameraAcceleration = 0
-		Game.cameraSpeed = 0
+		self:gameOver()
 	end
 
 	if love.keyboard.isDown('a', 'left') then
@@ -157,7 +154,7 @@ function Player:drawGUI()
 		love.graphics.printf('Game over!', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
 
 		love.graphics.setFont(SmallFont)
-		love.graphics.printf('Made it ' .. math.floor(self.position.x) .. ' feet', 0, love.graphics.getHeight() / 2 + 75, love.graphics.getWidth(), 'center')
+		love.graphics.printf('Made it ' .. Game.score .. ' feet', 0, love.graphics.getHeight() / 2 + 75, love.graphics.getWidth(), 'center')
 		love.graphics.printf('\'r\' to retry', 0, love.graphics.getHeight() / 2 + 120, love.graphics.getWidth(), 'center')
 	end
 
@@ -197,13 +194,22 @@ function Player:collide(col)
 		if other.id == 'h' then
 			if col.normal.y == -1 then
 				if not Game.isOver then
-					love.audio.newSource('sound/Hit_Hurt90.wav', 'static'):play()
-
-					Game.isOver = true
+					self:gameOver()
 				end
 			end
 		end
 	end
+end
+
+function Player:gameOver()
+	love.audio.newSource('sound/Hit_Hurt90.wav', 'static'):play()
+
+	Game.isOver = true
+
+	Game.cameraAcceleration = 0
+	Game.cameraSpeed = 0
+
+	Game.score = math.floor(self.position.x)
 end
 
 return Player

@@ -13,6 +13,8 @@ function Game:enter()
 
 	self.sunbeams:add(Sunbeam {x = 48, y = 0})
 
+	Instantiate(Enemy {x = 128, y = 32})
+
 	self.player = Instantiate(Player {x = 24, y = 64})
 
 	self.gameStarted = false
