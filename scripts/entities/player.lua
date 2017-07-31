@@ -21,7 +21,7 @@ function Player:init(properties)
 	end
 
 	self.maxCharges = 3
-	self.weaponCharges = self.maxCharges
+	self.weaponCharges = 0
 	self.chargeSpeed = 1
 
 	self.chargeSound = love.audio.newSource('sound/charge.wav', 'static')

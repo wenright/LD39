@@ -7,21 +7,23 @@ function Game:enter()
 
 	self.sunbeams = EntitySystem()
 
-	local initChunk = Instantiate(Map 'maps/map1.csv')
+	local initChunk = Instantiate(Map 'maps/map0.csv')
 	initChunk.isFurthest = true
 	Game.oldestChunk = initChunk
-	initChunk:addEnemies()
-	initChunk:addSunbeams()
+
+	self.sunbeams:add(Sunbeam {x = 48, y = 0})
 
 	self.player = Instantiate(Player {x = 24, y = 64})
+
+	self.gameStarted = false
 
 	love.graphics.setBackgroundColor(Color.white)
 
 	self.timer = Timer.new()
 
 	Camera:lookAt(24, 16)
-	self.cameraSpeed = 25
-	self.cameraAcceleration = 0.75
+	self.cameraSpeed = 30
+	self.cameraAcceleration = 0.8
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)
@@ -34,10 +36,16 @@ end
 function Game:update(dt)
 	self.timer:update(dt)
 
-	self.cameraSpeed = self.cameraSpeed + dt * self.cameraAcceleration
-	self.player.speed = self.cameraSpeed * 2 + 50
+	if self.gameStarted then
+		self.cameraSpeed = self.cameraSpeed + dt * self.cameraAcceleration
+		self.player.speed = self.cameraSpeed * 2 + 50
 
-	Camera:move(dt * self.cameraSpeed, 0)
+		Camera:move(dt * self.cameraSpeed, 0)
+	else
+		if self.player.position.x > 64 then
+			self.gameStarted = true
+		end
+	end
 
 	self.entities:loop('update', dt)
 	self.sunbeams:loop('update', dt)
