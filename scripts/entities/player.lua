@@ -116,6 +116,12 @@ function Player:keypressed(btn)
 	end
 end
 
+function Player:draw()
+	if not Game.isOver then
+		Actor.draw(self)
+	end
+end
+
 function Player:drawBlack()
 	love.graphics.setColor(Color.black)
 	self:draw()
@@ -177,6 +183,23 @@ end
 
 function Player:canMoveRight()
 	return not (math.abs(self.position.x + self.w / 2 - Camera.x) > (love.graphics.getWidth() / 2) / Camera.scale)
+end
+
+function Player:collide(col)
+	local other = col.other
+
+	if other.type == 'Tile' then
+
+		if other.id == 'h' then
+			if col.normal.y == -1 then
+				if not Game.isOver then
+					love.audio.newSource('sound/Hit_Hurt90.wav', 'static'):play()
+
+					Game.isOver = true
+				end
+			end
+		end
+	end
 end
 
 return Player

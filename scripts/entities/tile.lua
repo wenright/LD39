@@ -7,7 +7,8 @@ local Tile = Class {
 		d = love.graphics.newImage('art/corner-bl-1.png'),
 		e = love.graphics.newImage('art/wall-right-1.png'),
 		f = love.graphics.newImage('art/box-full.png'),
-		g = love.graphics.newImage('art/box-middle.png')
+		g = love.graphics.newImage('art/box-middle.png'),
+		h = love.graphics.newImage('art/spike.png')
 	}
 }
 
