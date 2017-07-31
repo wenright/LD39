@@ -35,7 +35,7 @@ function Game:update(dt)
 	self.timer:update(dt)
 
 	self.cameraSpeed = self.cameraSpeed + dt * self.cameraAcceleration
-	self.player.speed = self.cameraSpeed * 3
+	self.player.speed = self.cameraSpeed * 2 + 50
 
 	Camera:move(dt * self.cameraSpeed, 0)
 
