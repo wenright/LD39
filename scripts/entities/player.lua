@@ -48,7 +48,7 @@ function Player:update(dt)
 end
 
 function Player:move(dt)
-	if not Game.isOver and Game:isOutOfView(self.position.x) then
+	if not Game.isOver and Game:isOutOfView(self.position.x + self.w) then
 		Game.isOver = true
 
 		Game.cameraAcceleration = 0
