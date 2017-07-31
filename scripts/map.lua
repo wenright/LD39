@@ -50,21 +50,13 @@ function Map:update(dt)
 				self.xOffset + mapWidth
 			))
 
+			newChunk:addEnemies()
+			newChunk:addSunbeams()
+
+			-- Update which chunk is the furthest
 			newChunk.isFurthest = true
 			self.isFurthest = false
 			self.nextChunk = newChunk
-
-			-- Spawn a new sunbeam randomly along this chunk
-			Game.sunbeams:add(Sunbeam {
-				x = newChunk.xOffset + math.random() * mapWidth,
-				y = 0
-			})
-
-			-- Spawn enemies
-			local numEnemies = math.random(1, 4)
-			for i=1, numEnemies do
-				Instantiate(Enemy {x = newChunk.xOffset + math.random() * mapWidth, y = 24})
-			end
 		end
 
 		-- Destroy the oldest chunk once it is far enough away
@@ -74,6 +66,20 @@ function Map:update(dt)
 
 			Destroy(oldestChunk)
 		end
+	end
+end
+
+function Map:addEnemies()
+	Game.sunbeams:add(Sunbeam {
+		x = self.xOffset + math.random() * mapWidth,
+		y = 0
+	})
+end
+
+function Map:addSunbeams()
+	local numEnemies = math.random(1, 4)
+	for i=1, numEnemies do
+		Instantiate(Enemy {x = self.xOffset + math.random() * mapWidth, y = 24})
 	end
 end
 
