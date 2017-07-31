@@ -18,12 +18,14 @@ function Bullet:init(properties)
 	self.drag = 0.5
 	self.lifetime = 1
 
-	self.type = 'Bullet'
-
 	self.timer = Timer.new()
 	self.timer:after(self.lifetime, function()
 		Destroy(self)
 	end)
+
+	love.audio.newSource('sound/laser2.wav', 'static'):play()
+
+	self.type = 'Bullet'
 end
 
 function Bullet:update(dt)
@@ -47,6 +49,8 @@ function Bullet:draw()
 end
 
 function Bullet:collide(col)
+	love.audio.newSource('sound/Hit_Hurt90.wav', 'static'):play()
+
 	if col.other.type == 'Tile' then
 		Timer.after(0, function() Destroy(self) end)
 

@@ -24,6 +24,8 @@ function Player:init(properties)
 	self.weaponCharges = self.maxCharges
 	self.chargeSpeed = 1
 
+	self.chargeSound = love.audio.newSource('sound/charge.wav', 'static')
+
 	self.type = 'Player'
 end
 
@@ -35,6 +37,12 @@ function Player:update(dt)
 	Actor.update(self, dt)
 
 	self:move(dt)
+
+	if not self.isCharging then
+		self.chargeSound:stop()
+	end
+
+	self.isCharging = false
 end
 
 function Player:move(dt)
@@ -64,8 +72,18 @@ end
 
 -- Charge the player's weapon at each tick
 function Player:charge(dt)
+	if not self.chargeSound:isPlaying() and self.weaponCharges < self.maxCharges then
+		self.chargeSound:play()
+	end
+
+	if self.weaponCharges == self.maxCharges then
+		self.chargeSound:stop()
+	end
+
 	-- TODO does weapon charge more the longer stood in light, or even a split second would be full charge?
 	self.weaponCharges = math.min(self.weaponCharges + dt * self.chargeSpeed, self.maxCharges)
+
+	self.isCharging = true
 end
 
 function Player:keypressed(btn)

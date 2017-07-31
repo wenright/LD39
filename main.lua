@@ -1,5 +1,7 @@
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
+math.randomseed(os.time())
+
 Lume = require 'lib.lume.lume'
 
 Timer = require 'lib.hump.timer'
