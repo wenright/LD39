@@ -36,6 +36,10 @@ function Map:init(filename)
 	end
 end
 
+function Map:update(dt)
+	
+end
+
 function Map:drawBlack()
 	self.tiles:loop('drawBlack')
 end

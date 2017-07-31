@@ -17,8 +17,8 @@ function Game:enter()
 	self.timer = Timer.new()
 
 	Camera:lookAt(24, 16)
-	self.cameraSpeed = 20
-	self.cameraAcceleration = 1.5
+	self.cameraSpeed = 15
+	self.cameraAcceleration = 1.25
 
 	self.sunbeams = EntitySystem()
 
@@ -39,6 +39,7 @@ function Game:update(dt)
 
 	Camera:move(dt * self.cameraSpeed, 0)
 
+	self.map:update(dt)
 	self.entities:loop('update', dt)
 	self.sunbeams:loop('update', dt)
 end

@@ -35,7 +35,8 @@ Debug = true
 
 Color = {
 	white = {255, 255, 255},
-	black = {0, 0, 0}
+	black = {0, 0, 0},
+	grey = {150, 150, 150}
 }
 
 function love.load(args)

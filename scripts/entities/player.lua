@@ -120,6 +120,8 @@ end
 function Player:drawGUI()
 	-- Draw player's weapon charges
 	for i=1, Game.player.maxCharges do
+		local oldColor = {love.graphics.getColor()}
+
 		local x = 45 * i - 30
 		local y = 30
 		local w = 30
@@ -127,6 +129,12 @@ function Player:drawGUI()
 
 		if i <= Game.player.weaponCharges then
 			love.graphics.rectangle('fill', x, y, w, h)
+		elseif i > Game.player.weaponCharges and i < Game.player.weaponCharges + 1 then
+			love.graphics.setColor(Color.grey)
+			local diff = (Game.player.weaponCharges - math.floor(Game.player.weaponCharges))
+			love.graphics.rectangle('fill', x, y, diff * w, h)
+
+			love.graphics.setColor(oldColor)
 			love.graphics.rectangle('line', x, y, w, h)
 		else
 			love.graphics.rectangle('line', x, y, w, h)
