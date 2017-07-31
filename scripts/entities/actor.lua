@@ -23,6 +23,26 @@ function Actor:update(dt)
 	Rigidbody.update(self, dt)
 end
 
+function Actor:moveLeft(dt)
+	self.flipped = -1
+	self.animation:update(dt)
+
+	self:setForce(-self.speed, self.velocity.y)
+end
+
+function Actor:moveRight(dt)
+	self.flipped = 1
+	self.animation:update(dt)
+
+	self:setForce(self.speed, self.velocity.y)
+end
+
+function Actor:resetAnimation()
+	self.animation:gotoFrame(1)
+	self.position.x = self:getX()
+	self.position.y = self:getY()
+end
+
 function Actor:drawBlack()
 	love.graphics.setColor(Color.black)
 	self:draw()

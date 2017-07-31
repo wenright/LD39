@@ -56,9 +56,15 @@ function Map:update(dt)
 
 			-- Spawn a new sunbeam randomly along this chunk
 			Game.sunbeams:add(Sunbeam {
-				x = self.xOffset + math.random() * mapWidth,
+				x = newChunk.xOffset + math.random() * mapWidth,
 				y = 0
 			})
+
+			-- Spawn enemies
+			local numEnemies = math.random(1, 4)
+			for i=1, numEnemies do
+				Instantiate(Enemy {x = newChunk.xOffset + math.random() * mapWidth, y = 24})
+			end
 		end
 
 		-- Destroy the oldest chunk once it is far enough away

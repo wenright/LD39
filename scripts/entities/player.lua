@@ -39,19 +39,11 @@ end
 
 function Player:move(dt)
 	if love.keyboard.isDown('a', 'left') then
-		self.flipped = -1
-		self.animation:update(dt)
-
-		self:setForce(-self.speed, self.velocity.y)
+		self:moveLeft(dt)
 	elseif love.keyboard.isDown('d', 'right') then
-		self.flipped = 1
-		self.animation:update(dt)
-
-		self:setForce(self.speed, self.velocity.y)
+		self:moveRight(dt)
 	else
-		self.animation:gotoFrame(1)
-		self.position.x = self:getX()
-		self.position.y = self:getY()
+		self:resetAnimation()
 	end
 
 	if love.keyboard.isDown('space', 'w', 'up') then

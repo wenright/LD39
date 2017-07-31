@@ -10,11 +10,6 @@ function Game:enter()
 	Game.oldestChunk = initChunk
 
 	self.player = Instantiate(Player {x = 24, y = 64})
-	self.enemies = {
-		Instantiate(Enemy {x = 256, y = 64}),
-		Instantiate(Enemy {x = 96, y = 64}),
-		Instantiate(Enemy {x = 64, y = 36})
-	}
 
 	love.graphics.setBackgroundColor(Color.white)
 
@@ -25,8 +20,6 @@ function Game:enter()
 	self.cameraAcceleration = 1.25
 
 	self.sunbeams = EntitySystem()
-
-	self.sunbeams:add(Sunbeam {x = 0, y = 0})
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)
