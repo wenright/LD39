@@ -70,7 +70,8 @@ function Player:keypressed(btn)
 			x = self.position.x + self.flipped * 7,
 			y = self.position.y + 8,
 			time = self.timeRunning,
-			dir = self.flipped
+			dir = self.flipped,
+			parentVx = self.velocity.x
 		}
 
 		Instantiate(Bullet(bullet))

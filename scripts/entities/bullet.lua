@@ -14,7 +14,7 @@ function Bullet:init(properties)
 		end
 	end
 
-	self.velocity.x = 150 * (properties.dir or 1)
+	self.velocity.x = (150 + properties.parentVx / 4) * (properties.dir or 1)
 	self.drag = 0.5
 	self.lifetime = 1
 
