@@ -43,7 +43,7 @@ function Rigidbody:update(dt)
 			end
 
 			if col.normal.y == -1 then
-				self.canJump = true;
+				self.canJump = true
 			end
 		end
 	end

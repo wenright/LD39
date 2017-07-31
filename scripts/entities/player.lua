@@ -53,6 +53,10 @@ function Player:move(dt)
 		self:resetAnimation()
 	end
 
+	if not self.canJump then
+		self:pauseAnimation()
+	end
+
 	if love.keyboard.isDown('space', 'w', 'up') then
 		self:jump()
 	end

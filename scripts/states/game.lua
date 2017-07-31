@@ -21,7 +21,7 @@ function Game:enter()
 
 	Camera:lookAt(24, 16)
 	self.cameraSpeed = 25
-	self.cameraAcceleration = 1.25
+	self.cameraAcceleration = 0.75
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)

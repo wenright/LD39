@@ -43,6 +43,10 @@ function Actor:resetAnimation()
 	self.position.y = self:getY()
 end
 
+function Actor:pauseAnimation(dt)
+	self.animation:gotoFrame(7)
+end
+
 function Actor:drawBlack()
 	love.graphics.setColor(Color.black)
 	self:draw()

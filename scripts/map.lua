@@ -77,9 +77,9 @@ function Map:addSunbeams()
 end
 
 function Map:addEnemies()
-	local numEnemies = math.random(1, 4)
+	local numEnemies = math.random(1, 5)
 	for i=1, numEnemies do
-		Instantiate(Enemy {x = self.xOffset + math.random() * mapWidth, y = -128})
+		Instantiate(Enemy {x = self.xOffset + math.random() * mapWidth, y = -32})
 	end
 end
 
