@@ -153,8 +153,12 @@ end
 function Player:drawGUI()
 	-- Draw game over if that's the case
 	if Game.isOver then
+		love.graphics.setFont(LargeFont)
 		love.graphics.printf('Game over!', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
-		love.graphics.printf('\'r\' to retry', 0, love.graphics.getHeight() / 2 + 60, love.graphics.getWidth(), 'center')
+
+		love.graphics.setFont(SmallFont)
+		love.graphics.printf('Made it ' .. math.floor(self.position.x) .. ' feet', 0, love.graphics.getHeight() / 2 + 75, love.graphics.getWidth(), 'center')
+		love.graphics.printf('\'r\' to retry', 0, love.graphics.getHeight() / 2 + 120, love.graphics.getWidth(), 'center')
 	end
 
 	-- Draw player's weapon charges

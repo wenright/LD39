@@ -50,7 +50,9 @@ function love.load(args)
 	Gamestate.registerEvents()
 	Gamestate.switch(Game)
 
-	love.graphics.setFont(love.graphics.newFont('font/kenpixel_high.ttf', 64))
+	LargeFont = love.graphics.newFont('font/kenpixel_high.ttf', 64)
+	SmallFont = love.graphics.newFont('font/kenpixel_high.ttf', 32)
+	love.graphics.setFont(LargeFont)
 end
 
 function love.update(dt)
