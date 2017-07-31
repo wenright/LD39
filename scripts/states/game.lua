@@ -26,7 +26,7 @@ function Game:enter()
 
 	self.sunbeams = EntitySystem()
 
-	self.sunbeams:add(Sunbeam {x = 100, y = -100, w = 50, h = 1000})
+	self.sunbeams:add(Sunbeam {x = 0, y = 0})
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)

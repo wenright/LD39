@@ -14,12 +14,12 @@ local Tile = Class {
 function Tile:init(properties)
 	Transform.init(self, properties)
 
-	-- self.img = properties.img
 	self.w, self.h = Map.tileSize, Map.tileSize
 	self.id = properties.tileId
 
 	Game.world:add(self)
 
+	assert(self.tiles[self.id], 'That tile does not exist')
 	self.img = self.tiles[self.id]
 
 	self.type = 'Tile'

@@ -5,6 +5,8 @@ local Sunbeam = Class {
 function Sunbeam:init(properties)
 	self.rotation = math.pi / 8
 
+	properties.w, properties.h = 50, 200
+
 	Rigidbody.init(self, properties)
 
 	self.filterFunction = function(item, other)
@@ -23,6 +25,11 @@ end
 function Sunbeam:update(dt)
 	if self:checkCollision() then
 		Game.player:charge(dt)
+	end
+
+	-- Remove sunbeam once it is out of camera range
+	if math.abs(self.position.x - Camera.x) > love.graphics.getWidth() / Camera.scale and self.position.x < Camera.x then
+		Game.sunbeams:remove(self)
 	end
 end
 
