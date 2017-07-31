@@ -69,14 +69,14 @@ function Map:update(dt)
 	end
 end
 
-function Map:addEnemies()
+function Map:addSunbeams()
 	Game.sunbeams:add(Sunbeam {
 		x = self.xOffset + math.random(mapWidth * (1/4), mapWidth * (3/4)),
 		y = 0
 	})
 end
 
-function Map:addSunbeams()
+function Map:addEnemies()
 	local numEnemies = math.random(1, 4)
 	for i=1, numEnemies do
 		Instantiate(Enemy {x = self.xOffset + math.random() * mapWidth, y = -128})
