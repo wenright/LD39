@@ -54,8 +54,7 @@ function Bullet:collide(col)
 	if col.other.type == 'Tile' then
 		Timer.after(0, function() Destroy(self) end)
 
-		-- TODO destructable tiles?
-		-- Timer.after(0, function() Destroy(col.other) end)
+		Timer.after(0, function() col.other:destroy() end)
 	end
 end
 

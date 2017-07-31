@@ -14,7 +14,8 @@ function Map:init(filename, xOffset)
 		self.tiles:add(Tile({
 			x = x + self.xOffset,
 			y = y,
-			tileId = tileId
+			tileId = tileId,
+			parentSystem = self.tiles
 		}))
 	end
 
@@ -45,8 +46,10 @@ function Map:update(dt)
 	if self.isFurthest then
 		if math.abs(Camera.x - (mapWidth + self.xOffset)) < mapWidth then
 			-- Spawn a new map chunk
+			local mapType = math.random(1, 3)
+
 			local newChunk = Instantiate(Map(
-				'maps/map1.csv',
+				'maps/map' .. mapType .. '.csv',
 				self.xOffset + mapWidth
 			))
 

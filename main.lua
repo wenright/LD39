@@ -1,4 +1,5 @@
 love.graphics.setDefaultFilter('nearest', 'nearest')
+love.audio.setVolume(0.3)
 
 math.randomseed(os.time())
 

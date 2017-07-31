@@ -22,6 +22,8 @@ function Tile:init(properties)
 	assert(self.tiles[self.id], 'That tile does not exist')
 	self.img = self.tiles[self.id]
 
+	self.parentSystem = properties.parentSystem
+
 	self.type = 'Tile'
 end
 
@@ -37,6 +39,14 @@ end
 
 function Tile:draw()
 	love.graphics.draw(self.img, self.position.x, self.position.y)
+end
+
+function Tile:destroy()
+	if Game.world:hasItem(self) then
+		Game.world:remove(self)
+	end
+
+	self.parentSystem:remove(self)
 end
 
 return Tile
