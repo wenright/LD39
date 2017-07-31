@@ -7,7 +7,7 @@ function Game:enter()
 
 	self.sunbeams = EntitySystem()
 
-	local initChunk = Instantiate(Map 'maps/map0.csv')
+	local initChunk = Instantiate(Map 'maps/map4.csv')
 	initChunk.isFurthest = true
 	Game.oldestChunk = initChunk
 

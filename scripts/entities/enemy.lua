@@ -71,6 +71,19 @@ function Enemy:startMoveTimer()
 	end)
 end
 
+function Enemy:collide(col)
+	local other = col.other
+
+	if other.type == 'Tile' then
+
+		if other.id == 'h' then
+			if col.normal.y == -1 then
+				Destroy(self)
+			end
+		end
+	end
+end
+
 function Enemy:getRandomMovementTime()
 	local min = 1
 	local max = 3
