@@ -39,9 +39,16 @@ end
 
 function Player:move(dt)
 	if love.keyboard.isDown('a', 'left') then
+		if Game:isOutOfView(self.position.x) then
+			-- TODO game over
+		end
+
 		self:moveLeft(dt)
 	elseif love.keyboard.isDown('d', 'right') then
-		self:moveRight(dt)
+		-- Prevent player from past camera view on the right
+		if self:canMoveRight() then
+			self:moveRight(dt)
+		end
 	else
 		self:resetAnimation()
 	end
@@ -132,6 +139,10 @@ function Player:drawGUI()
 			love.graphics.rectangle('line', x, y, w, h)
 		end
 	end
+end
+
+function Player:canMoveRight()
+	return not (math.abs(self.position.x + self.w / 2 - Camera.x) > (love.graphics.getWidth() / 2) / Camera.scale)
 end
 
 return Player

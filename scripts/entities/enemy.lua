@@ -10,6 +10,8 @@ function Enemy:init(properties)
 	self.filterFunction = function(item, other)
 		if other.type == 'Bullet' then
 			return 'cross'
+		elseif other.type == 'Enemy' then
+			return nil
 		elseif other.type == 'Sunbeam' then
 			return nil
 		else

@@ -6,7 +6,7 @@ function Game:enter()
 	self.entities = EntitySystem()
 
 	self.sunbeams = EntitySystem()
-	
+
 	local initChunk = Instantiate(Map 'maps/map1.csv')
 	initChunk.isFurthest = true
 	Game.oldestChunk = initChunk
@@ -21,7 +21,7 @@ function Game:enter()
 
 	Camera:lookAt(24, 16)
 	self.cameraSpeed = 25
-	self.cameraAcceleration = 0
+	self.cameraAcceleration = 1.25
 
 	self.stencilFunction = function()
 		self.sunbeams:forEach(function(sunbeam)
@@ -35,6 +35,7 @@ function Game:update(dt)
 	self.timer:update(dt)
 
 	self.cameraSpeed = self.cameraSpeed + dt * self.cameraAcceleration
+	self.player.speed = self.cameraSpeed * 3
 
 	Camera:move(dt * self.cameraSpeed, 0)
 
