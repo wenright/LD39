@@ -20,6 +20,10 @@ end
 
 function Enemy:update(dt)
 	Actor.update(self, dt)
+
+	if Game:isOutOfView(self.position.x + self.w) then
+		Destroy(self)
+	end
 end
 
 function Enemy:draw()

@@ -28,7 +28,7 @@ function Sunbeam:update(dt)
 	end
 
 	-- Remove sunbeam once it is out of camera range
-	if math.abs(self.position.x - Camera.x) > love.graphics.getWidth() / Camera.scale and self.position.x < Camera.x then
+	if Game:isOutOfView(self.position.x + self.h) then
 		Game.sunbeams:remove(self)
 	end
 end

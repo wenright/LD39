@@ -87,6 +87,10 @@ function Game:restart()
 	Game:enter()
 end
 
+function Game:isOutOfView(x)
+	return math.abs(x - Camera.x) > (love.graphics.getWidth() / 2) / Camera.scale and x < Camera.x
+end
+
 -- Wrapper function to add a new object to the entity system
 function Instantiate(obj)
 	return Game.entities:add(obj)

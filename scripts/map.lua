@@ -55,11 +55,14 @@ function Map:update(dt)
 			self.nextChunk = newChunk
 
 			-- Spawn a new sunbeam randomly along this chunk
-			Game.sunbeams:add(Sunbeam {x = self.xOffset + math.random() * mapWidth, y = 0})
+			Game.sunbeams:add(Sunbeam {
+				x = self.xOffset + math.random() * mapWidth,
+				y = 0
+			})
 		end
 
 		-- Destroy the oldest chunk once it is far enough away
-		if math.abs(Camera.x - (Game.oldestChunk.xOffset)) > mapWidth + (love.graphics.getWidth() / 2) / Camera.scale then
+		if Game:isOutOfView(Game.oldestChunk.xOffset + mapWidth) then
 			local oldestChunk = Game.oldestChunk
 			Game.oldestChunk = oldestChunk.nextChunk
 
