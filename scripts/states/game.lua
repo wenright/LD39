@@ -4,7 +4,11 @@ function Game:enter()
 	self.world = World()
 
 	self.entities = EntitySystem()
-	self.map = Instantiate(Map 'maps/map1.csv')
+
+	local initChunk = Instantiate(Map 'maps/map1.csv')
+	initChunk.isFurthest = true
+	Game.oldestChunk = initChunk
+
 	self.player = Instantiate(Player {x = 24, y = 64})
 	self.enemies = {
 		Instantiate(Enemy {x = 256, y = 64}),
@@ -39,7 +43,6 @@ function Game:update(dt)
 
 	Camera:move(dt * self.cameraSpeed, 0)
 
-	self.map:update(dt)
 	self.entities:loop('update', dt)
 	self.sunbeams:loop('update', dt)
 end

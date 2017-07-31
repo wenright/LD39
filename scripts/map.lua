@@ -1,13 +1,18 @@
 local Map = Class {tileSize = 16}
 
-function Map:init(filename)
+local numTiles = 24
+local mapWidth = Map.tileSize * numTiles
+
+function Map:init(filename, xOffset)
+	self.xOffset = xOffset or 0
+
 	self.tiles = EntitySystem()
 
 	function addTile(x, y, tileId)
 		if tileId == '' or tileId == ' ' then return end
 
 		self.tiles:add(Tile({
-			x = x,
+			x = x + self.xOffset,
 			y = y,
 			tileId = tileId
 		}))
@@ -37,7 +42,27 @@ function Map:init(filename)
 end
 
 function Map:update(dt)
-	
+	if self.isFurthest then
+		if math.abs(Camera.x - (mapWidth + self.xOffset)) < mapWidth then
+			-- Spawn a new map chunk
+			local newChunk = Instantiate(Map(
+				'maps/map1.csv',
+				self.xOffset + mapWidth
+			))
+
+			newChunk.isFurthest = true
+			self.isFurthest = false
+			self.nextChunk = newChunk
+		end
+
+		-- TODO test that this is working properly
+		if math.abs(Camera.x - (Game.oldestChunk.xOffset)) > mapWidth + (love.graphics.getWidth() / 2) / Camera.scale then
+			local oldestChunk = Game.oldestChunk
+			Game.oldestChunk = oldestChunk.nextChunk
+
+			Destroy(oldestChunk)
+		end
+	end
 end
 
 function Map:drawBlack()
