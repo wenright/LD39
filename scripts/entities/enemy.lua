@@ -81,6 +81,13 @@ function Enemy:collide(col)
 				Destroy(self)
 			end
 		end
+	elseif col.other.type == 'Bullet' then
+		love.audio.newSource('sound/Hit_Hurt91.wav', 'static'):play()
+
+		Timer.after(0, function() Destroy(col.other) end)
+
+		-- TODO damage
+		Timer.after(0, function() Destroy(self) end)
 	end
 end
 
