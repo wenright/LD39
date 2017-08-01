@@ -46,7 +46,7 @@ function Map:update(dt)
 	if self.isFurthest then
 		if math.abs(Camera.x - (mapWidth + self.xOffset)) < mapWidth then
 			-- Spawn a new map chunk
-			local mapType = math.random(1, 4)
+			local mapType = math.random(1, 5)
 
 			local newChunk = Instantiate(Map(
 				'maps/map' .. mapType .. '.csv',

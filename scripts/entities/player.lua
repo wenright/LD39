@@ -209,7 +209,7 @@ function Player:gameOver()
 	Game.cameraAcceleration = 0
 	Game.cameraSpeed = 0
 
-	Game.score = math.floor(self.position.x)
+	Game.score = math.floor(self.position.x / 5)
 end
 
 return Player
