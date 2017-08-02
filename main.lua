@@ -12,8 +12,6 @@ Camera = require 'lib.hump.camera'(0, 0)
 
 Bump = require 'lib.bump.bump'
 
-Lovebird = require 'lib.lovebird.lovebird'
-
 EntitySystem = require 'lib.entitysystem'
 
 Animation = require 'lib.anim8'
@@ -57,10 +55,6 @@ end
 
 function love.update(dt)
 	Timer.update(dt)
-
-	if Debug then
-		Lovebird:update(dt)
-	end
 end
 
 function love.draw()
